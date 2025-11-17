@@ -122,7 +122,7 @@ const experience = [
   {
     role: "Generative AI Engnieer",
     company: "AlgoArtha Pvt. Ltd., Pune",
-    duration: "Sep 2024 - Dec 2024",
+    duration: "Aug 2024 - Dec 2024",
     description: [
       "RAG Development: Contributed to a production RAG system using LangChain, resulting in a 40% accuracy improvement in search.",
       "LLM Training: Fine-tuned a pre-trained LLM on 10,000 proprietary documents, achieving a 20% reduction in factual errors.",
@@ -132,7 +132,7 @@ const experience = [
   {
     role: "Data Analyst",
     company: "Productry",
-    duration: "Dec 2023 - May 2024",
+    duration: "Sept 2023 - May 2024",
     description: [
       "SQL/ETL: Developed and maintained SQL queries for ETL processes, improving data warehousing efficiency by 30%.",
       "Dashboarding: Created over 10 dashboards (Tableau/Power BI) that guided strategic product decisions.",
