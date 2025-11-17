@@ -110,7 +110,7 @@ const projects = [
 
 const experience = [
   {
-    role: "Programmer Analyst Trainee",
+    role: "AI/ML Engineer",
     company: "Cognizant Technology Solutions",
     duration: "Feb 2025 - Present",
     description: [
@@ -120,7 +120,7 @@ const experience = [
     ],
   },
   {
-    role: "Generative AI Intern",
+    role: "Generative AI Engnieer",
     company: "AlgoArtha Pvt. Ltd., Pune",
     duration: "Sep 2024 - Dec 2024",
     description: [
@@ -130,7 +130,7 @@ const experience = [
     ],
   },
   {
-    role: "Data Analyst Intern",
+    role: "Data Analyst",
     company: "Productry",
     duration: "Dec 2023 - May 2024",
     description: [
