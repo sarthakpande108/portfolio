@@ -23,3 +23,13 @@
 .email-link{border-color:#a66f59}
 .case-links a{border-color:#a66f59}
 @media(prefers-reduced-motion:reduce){.reveal,.reveal.is-visible{opacity:1;transform:none;transition:none}.diagram-node:after,.art-core,.hero-status i,.art-orbit{animation:none!important}}
+
+
+/* Reliable reveal fallback and smoother first-viewport motion */
+.reveal.is-visible{will-change:opacity,transform}
+.hero-status.reveal.is-visible{transition-delay:.04s}
+.hero h1.reveal.is-visible{transition-delay:.12s}
+.hero-statement.reveal.is-visible{transition-delay:.2s}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important}
+}
