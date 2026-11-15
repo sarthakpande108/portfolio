@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const projects = [
@@ -102,6 +102,15 @@ function Project({project}) {
 
 export default function App() {
  const [menu,setMenu]=useState(false);
+ useEffect(() => {
+   const targets = document.querySelectorAll(".section, .case-study, .hero-status, .hero h1, .hero-statement");
+   if (!("IntersectionObserver" in window)) { targets.forEach(el => el.classList.add("is-visible")); return; }
+   const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+     if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); }
+   }), { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
+   targets.forEach(el => { el.classList.add("reveal"); observer.observe(el); });
+   return () => observer.disconnect();
+ }, []);
  return <div className="portfolio">
   <header className="site-header"><a className="monogram" href="#home">SP<span>.</span></a><nav className={menu?"nav-open":""}>{[["About","#about"],["Experience","#experience"],["Projects","#projects"],["Stack","#stack"]].map(([label,href])=><a href={href} key={href} onClick={()=>setMenu(false)}>{label}</a>)}<a className="nav-contact" href="#contact" onClick={()=>setMenu(false)}>Let's talk ↗</a></nav><button className="mobile-menu" onClick={()=>setMenu(!menu)} aria-label="Toggle menu">{menu?"×":"☰"}</button></header>
   <main id="home">
