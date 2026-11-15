@@ -3,73 +3,47 @@ import "./App.css";
 
 const projects = [
   {
-    id:"01", type:"OPEN SOURCE / FLAGSHIP", title:"Embedding Drift Detection",
-    intro:"A statistical monitoring layer for the part of a RAG system that is easy to overlook: the vector space itself.",
-    problem:"A retrieval system can keep returning results while the distribution of incoming embeddings quietly moves away from the distribution its index was built around. Without monitoring, teams may only notice after answer quality has degraded.",
-    approach:["Compare reference and current embedding distributions with Maximum Mean Discrepancy (MMD²) using an RBF kernel.","Measure Wasserstein distance across PCA dimensions to inspect how the distribution has shifted.","Use permutation testing to assess whether the observed difference is statistically meaningful.","Adapt sampling effort: start with a lightweight sample and increase it when drift is suspected."],
+    id:"01", type:"PERSONAL / OPEN SOURCE", title:"Embedding Drift Detection",
+    intro:"An open-source Python library that monitors whether the embedding distribution behind a RAG system is changing over time.",
+    problem:"A retrieval system can keep running while its vector distribution drifts, quietly weakening retrieval quality before teams notice a problem.",
+    approach:["Compare reference and current embeddings using Maximum Mean Discrepancy (MMD²) with an RBF kernel.","Measure Wasserstein distance across PCA dimensions to inspect distribution movement.","Apply permutation testing to assess whether observed drift is statistically significant.","Use adaptive sampling to balance monitoring cost and detection sensitivity."],
     architecture:["Reference vectors","Current vectors","Drift statistics","Significance test","Drift diagnosis"],
-    outcome:"A reusable Python library that reports drift severity and helps distinguish model drift, query shift and data staleness.",
+    outcome:"A reusable library for identifying and diagnosing embedding drift, query shift and data staleness in vector-based retrieval systems.",
     stack:["Python","NumPy","SciPy","scikit-learn","PCA","MMD²","Wasserstein"],
     repo:"https://github.com/sarthakpande108/embedding-drift-lib", extra:"https://pypi.org/project/embedding-drift-lib/", extraLabel:"PyPI package",
-    note:"Local library; no external service, API key or database required.", visual:"drift"
+    note:"Installable Python package. Runs locally without an external service or API key.", visual:"drift"
   },
   {
-    id:"02", type:"PERSONAL PROJECT / FLAGSHIP", title:"GenAI Trading Engine",
-    intro:"An AI-assisted market research and paper-trading system that separates deterministic market calculations from LLM-generated interpretation.",
-    problem:"Market research needs current data, repeatable indicators and explainable analysis. An LLM should not be responsible for calculating technical indicators or inventing market inputs.",
-    approach:["Fetch Indian equity market data through Angel One SmartAPI.","Calculate technical indicators and deterministic risk inputs in application code.","Pass structured market context to Gemini for a constrained research narrative and directional outlook.","Persist analyses and forecast outcomes in Neon PostgreSQL; support paper-portfolio workflows."],
+    id:"02", type:"PERSONAL / FLAGSHIP", title:"GenAI Trading Engine",
+    intro:"An AI-assisted market research and paper-trading system that keeps quantitative calculations separate from LLM-generated interpretation.",
+    problem:"Market analysis needs current data and repeatable calculations. A language model should interpret structured market context, not invent prices or calculate core indicators.",
+    approach:["Fetch Indian equity market data through Angel One SmartAPI.","Calculate technical indicators and risk inputs deterministically in application code.","Pass structured market context to Gemini for constrained research commentary and a directional outlook.","Persist analyses and forecast outcomes in Neon PostgreSQL and support paper-portfolio workflows."],
     architecture:["Angel One market data","Indicators + risk logic","Gemini structured analysis","Neon persistence","Paper portfolio"],
-    outcome:"A full-stack research workflow with a clear boundary between deterministic calculations and probabilistic language-model interpretation.",
+    outcome:"A full-stack research workflow with a clear boundary between deterministic market calculations and probabilistic LLM interpretation.",
     stack:["Node.js","Gemini API","Angel One SmartAPI","Neon PostgreSQL","Vercel"],
-    repo:"https://github.com/sarthakpande108/genai-trading-engine", extra:"https://genai-trading-engine.vercel.app/", extraLabel:"Deployment",
-    note:"Research and paper trading only. It does not place live broker orders. The hosted analysis flow requires runtime credentials.", visual:"market"
+    repo:"https://github.com/sarthakpande108/genai-trading-engine", extra:"https://genai-trading-engine.vercel.app/", extraLabel:"Live application",
+    note:"Research and paper trading only; it does not place live broker orders. The hosted analysis flow requires runtime credentials.", visual:"market"
   },
   {
-    id:"03", type:"ENTERPRISE / COGNIZANT", title:"Enterprise Agentic AI Platform",
-    intro:"A multi-agent enterprise assistant designed to route employee questions to the right domain knowledge and tools.",
-    problem:"Enterprise questions often span HR and policy domains. A single general-purpose agent can add latency and make retrieval less predictable when it searches broadly.",
-    approach:["Use a root agent to understand intent and route work to specialised domain agents.","Coordinate agent interactions through A2A and expose enterprise retrieval through MCP tools.","Select a small set of domain-relevant search keywords before retrieval rather than issuing repeated broad searches.","Use BM25-based search and session/event state to support grounded multi-turn conversations."],
-    architecture:["User request","Root orchestrator","Domain agent","MCP + BM25 search","Grounded response"],
-    outcome:"A domain-oriented orchestration design focused on controlled retrieval, fewer unnecessary tool calls and contextual follow-up handling.",
-    stack:["GCP","Python","A2A","MCP","BM25","Agent orchestration"],
-    note:"Enterprise work summary; internal implementation details and source code are not public.", visual:"agents"
-  },
-  {
-    id:"04", type:"ENTERPRISE / COGNIZANT", title:"RFP & Proposal Intelligence",
-    intro:"A document-intelligence workflow that retrieves relevant evidence from large proposal and presentation collections.",
-    problem:"Proposal teams need to find the right source material across long documents and slide decks, then use that material to draft grounded responses.",
-    approach:["Build an asynchronous ingestion workflow to extract, enrich and index document content.","Retrieve at two levels: document-level discovery followed by slide/page-level evidence retrieval.","Use HyDE and multi-hop expansion to improve retrieval for complex or chained questions.","Evaluate retrieval and generation with RAGAS and apply input/output guardrails."],
-    architecture:["Async ingestion","Document index","Document retrieval","Slide/page retrieval","Grounded generation"],
-    outcome:"A multi-stage retrieval workflow that connects broad document discovery to precise evidence selection and evaluated generation.",
-    stack:["Python","FastAPI","Azure OpenAI","Azure AI Search","HyDE","RAGAS"],
-    note:"Enterprise work summary; client documents and internal code are confidential.", visual:"rfp"
-  },
-  {
-    id:"05", type:"PERSONAL PROJECT", title:"Autonomous LinkedIn Content Agent",
-    intro:"A human-in-the-loop content workflow built around specialised agents rather than one large prompt.",
-    problem:"Researching topics, deciding what is worth posting and drafting a coherent post are different tasks with different evaluation criteria.",
-    approach:["Discover relevant source material.","Rank candidate topics using LLM and heuristic signals.","Draft content with a dedicated writing step.","Keep human approval before publishing and trace execution with LangSmith."],
+    id:"03", type:"PERSONAL / AGENTIC AI", title:"Autonomous LinkedIn Content Agent",
+    intro:"A human-in-the-loop agentic workflow that separates content discovery, topic prioritisation and writing into inspectable stages.",
+    problem:"Researching a topic, deciding whether it is worth sharing and drafting a useful post are distinct tasks that benefit from specialised steps and human review.",
+    approach:["Discover relevant source material and candidate topics.","Rank topics using language-model and heuristic signals.","Generate a draft through a dedicated writing stage.","Keep human approval before publishing and trace workflow execution."],
     architecture:["Discover","Rank","Draft","Human approval"],
-    outcome:"A staged content workflow where research, prioritisation and writing can be inspected separately.",
+    outcome:"A staged content-creation agent where research, prioritisation and drafting can be inspected independently before a person approves publication.",
     stack:["Python","LangGraph","LangSmith","Agentic AI"],
     repo:"https://github.com/sarthakpande108/Linkedin-Automation", visual:"agent"
-  },
-  {
-    id:"06", type:"PERSONAL PROJECT", title:"KTMantra",
-    intro:"A retrieval-augmented knowledge assistant for project onboarding and knowledge transfer.",
-    problem:"Project knowledge is often spread across documents, making it slower for a new team member to find a useful answer.",
-    approach:["Index project material for semantic retrieval.","Use retrieved context to ground Gemini-powered answers.","Expose the assistant through a lightweight Flask interface."],
-    architecture:["Project documents","Retrieval","Gemini response","Knowledge assistant"],
-    outcome:"A focused document-grounded assistant for onboarding and project knowledge discovery.",
-    stack:["Python","Flask","RAG","Gemini API"],
-    href:"https://ktmantra.vercel.app/", visual:"knowledge"
   }
 ];
 
 const experience = [
- {date:"FEB 2025 — PRESENT",role:"AI / GenAI Engineer",company:"Cognizant Technology Solutions",kind:"Enterprise AI",summary:"Building enterprise AI workflows across agent orchestration, retrieval and document intelligence.",points:["Designed a GCP agent architecture with a root agent and specialised domain agents, coordinated through A2A and MCP integrations.","Worked on an enterprise HR and policy assistant using domain-aware keyword selection, BM25 retrieval and multi-turn session state.","Developed an asynchronous RFP ingestion and retrieval workflow with document- and slide-level search, HyDE expansion and RAGAS evaluation.","Contributed to GenAI-powered PowerPoint automation and enterprise data engineering initiatives."]},
- {date:"SEP 2024 — DEC 2024",role:"Generative AI / Full Stack Intern",company:"AlgoArtha Pvt. Ltd.",kind:"Applied GenAI",summary:"Built a document-grounded application and worked across the retrieval and model integration layers.",points:["Built a RAG application using LangChain with a React frontend and Node.js backend.","Worked on LLM fine-tuning and document-grounded question answering.","Contributed across application, retrieval and model-integration components."]},
- {date:"DEC 2023 — MAY 2024",role:"Data Analyst Intern",company:"Productry",kind:"Data & Analytics",summary:"Worked with product data, reporting workflows and business-facing dashboards.",points:["Built SQL and ETL workflows to prepare and analyse product data.","Created Tableau and Power BI dashboards for product and business reporting.","Analysed product KPIs and user behaviour to surface actionable trends."]}
+ {date:"FEB 2025 — PRESENT",role:"AI / GenAI Engineer",company:"Cognizant Technology Solutions",kind:"Enterprise GenAI",summary:"Building enterprise-grade GenAI solutions across multi-agent orchestration, retrieval-augmented generation, document intelligence and workflow automation.",points:[
+  "Enterprise agentic AI platform: Designed a GCP-based agent workflow with a root orchestrator and specialised domain agents, using A2A for agent coordination and MCP for enterprise tool access.",
+  "HR and policy assistant: Implemented domain-aware keyword selection with BM25 retrieval, limiting search to the most relevant terms and supporting contextual multi-turn conversations through session and event state.",
+  "RFP and proposal intelligence: Built an asynchronous document-ingestion and retrieval workflow with document-level discovery followed by slide/page-level evidence retrieval; applied HyDE and multi-hop expansion, with RAGAS evaluation and guardrails.",
+  "GenAI PowerPoint automation: Contributed to a workflow that retrieves relevant corporate presentations, matches source material to user-provided documents using RAG, and generates tailored proposal presentations—helping reduce RFP preparation time by up to 80%.",
+  "Enterprise data migration: Supported a large US airline migration from Teradata to Amazon Redshift, validating downstream Tableau and Alteryx data pipelines."
+ ]}
 ];
 
 const stack = [
@@ -148,7 +122,7 @@ export default function App() {
     <div className="hero-index">PORTFOLIO / 2026</div>
    </section>
    <section id="about" className="section about"><SectionLabel n="01">WHO I AM</SectionLabel><div className="about-copy"><h2>I’m an AI engineer focused on making intelligent systems <em>useful, measurable and dependable.</em></h2><p>My work sits across retrieval-augmented generation, multi-agent systems and applied machine learning. I care about the engineering beneath the interface: how information is indexed, how an agent chooses a tool, how an answer is grounded, and how we know a system is behaving correctly.</p><p>At Cognizant, I work on enterprise GenAI workflows. Outside that work, I build and publish tools such as Embedding Drift Detection and experiment with AI-assisted financial research systems.</p><div className="about-facts"><div><small>NOW</small><b>AI / GenAI Engineer</b><span>Cognizant · Feb 2025 — Present</span></div><div><small>BASED IN</small><b>Pune</b><span>Maharashtra, India</span></div><div><small>EDUCATION</small><b>B.E. — AI & Data Science</b><span>Savitribai Phule Pune University</span></div></div></div></section>
-   <section id="experience" className="section experience"><SectionLabel n="02">EXPERIENCE</SectionLabel><div className="section-heading"><h2>Work I’ve been<br/><em>trusted to build.</em></h2><p>Professional experience across enterprise AI, applied GenAI and data analytics.</p></div><div className="experience-list">{experience.map((e,i)=><article className="experience-item" key={e.company}><div className="experience-date">{e.date}<span>0{i+1}</span></div><div className="experience-main"><div className="experience-heading"><div><h3>{e.company}</h3><b>{e.role}</b></div><span>{e.kind}</span></div><p className="experience-summary">{e.summary}</p><ul>{e.points.map(p=><li key={p}>{p}</li>)}</ul></div></article>)}</div></section>
+   <section id="experience" className="section experience"><SectionLabel n="02">EXPERIENCE</SectionLabel><div className="section-heading"><h2>Work I’ve been<br/><em>trusted to build.</em></h2><p>Selected enterprise GenAI and data-engineering initiatives delivered at Cognizant.</p></div><div className="experience-list">{experience.map((e,i)=><article className="experience-item" key={e.company}><div className="experience-date">{e.date}<span>0{i+1}</span></div><div className="experience-main"><div className="experience-heading"><div><h3>{e.company}</h3><b>{e.role}</b></div><span>{e.kind}</span></div><p className="experience-summary">{e.summary}</p><ul>{e.points.map(p=><li key={p}>{p}</li>)}</ul></div></article>)}</div></section>
    <section id="projects" className="section projects"><SectionLabel n="03">SELECTED PROJECTS</SectionLabel><div className="section-heading"><h2>Built from the<br/><em>problem outward.</em></h2><p>Each project starts with a concrete engineering problem, then makes the architecture and trade-offs visible.</p></div><div className="project-list">{projects.map(p=><Project key={p.id} project={p}/>)}</div></section>
    <section id="stack" className="section stack-section"><SectionLabel n="04">TOOLS & CAPABILITIES</SectionLabel><div className="section-heading"><h2>The tools behind<br/><em>the systems.</em></h2><p>A practical toolkit across retrieval, agent orchestration, data science and backend engineering.</p></div><div className="stack-grid">{stack.map(([name,...items],i)=><article key={name}><small>0{i+1} / CAPABILITY</small><h3>{name}</h3><div>{items.map(s=><span key={s}>{s}</span>)}</div></article>)}</div></section>
    <section className="section principles"><SectionLabel n="05">ENGINEERING PRINCIPLES</SectionLabel><div className="principle-grid"><article><b>01</b><h3>Deterministic where it matters.</h3><p>Keep calculations, constraints and validation in code. Use models for interpretation and synthesis where they add value.</p></article><article><b>02</b><h3>Retrieval is a product decision.</h3><p>Search quality, context selection and evidence traceability shape the quality of every downstream answer.</p></article><article><b>03</b><h3>Observe before it breaks.</h3><p>Evaluate outputs and monitor system behaviour instead of treating a successful response as proof of reliability.</p></article></div></section>
