@@ -33,3 +33,25 @@
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1!important;transform:none!important}
 }
+
+
+/* Scroll-triggered reveals: each content block animates as it enters the viewport. */
+.scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 34px, 0);
+  transition: opacity 720ms ease, transform 720ms cubic-bezier(.2,.72,.22,1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.scroll-reveal.scroll-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal, .scroll-reveal.scroll-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
+}
