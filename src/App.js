@@ -81,10 +81,10 @@ const stack = [
 
 function SectionLabel({n,children}) { return <div className="section-label"><span>{n}</span><i/><b>{children}</b></div>; }
 function Diagram({kind,items}) {
- return <div className={"diagram "+kind}>
-   <div className="diagram-caption">SYSTEM FLOW <span> / CONCEPTUAL ARCHITECTURE</span></div>
-   <div className="diagram-flow">{items.map((item,i)=><React.Fragment key={item}><div className={"diagram-node "+(i===Math.floor(items.length/2)?"active":"")}><small>0{i+1}</small><b>{item}</b></div>{i<items.length-1&&<span className="diagram-arrow">→</span>}</React.Fragment>)}</div>
-   <div className="diagram-foot"><span className="signal"/> Each stage has a defined responsibility</div>
+ return <div className={"diagram "+kind} role="img" aria-label={"Animated conceptual architecture: "+items.join(" flows to ")}>
+   <div className="diagram-caption"><span className="diagram-live-dot"/> LIVE SYSTEM FLOW <span> / CONCEPTUAL ARCHITECTURE</span></div>
+   <div className="diagram-flow">{items.map((item,i)=><React.Fragment key={item}><div className={"diagram-node "+(i===Math.floor(items.length/2)?"active":"")} style={{"--node-index":i}}><small>0{i+1} <span> / {i===0?"INPUT":i===items.length-1?"OUTPUT":"PROCESS"}</span></small><b>{item}</b><i className="node-status"/></div>{i<items.length-1&&<span className="diagram-arrow" aria-hidden="true"><i/></span>}</React.Fragment>)}</div>
+   <div className="diagram-foot"><span className="signal"/> <span>Data moves left to right</span><span className="diagram-foot-note">Illustrative architecture · not a live telemetry feed</span></div>
  </div>;
 }
 function Project({project}) {
