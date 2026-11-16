@@ -54,11 +54,9 @@ const projects = [
 ];
 
 const experiencePoints = [
-  ["Agentic AI platform", "Designed a GCP-based workflow with a root orchestrator and specialised domain agents, using A2A for coordination and MCP for enterprise tool access."],
-  ["HR and policy intelligence", "Built the HR-domain orchestration workflow: LLM-driven catalogue keyword selection and topic/intent-aware boosting, negative and localization catalogues, Liferay MCP retrieval, Google Semantic Reranker evaluation, response fallbacks and conversational state."],
-  ["RFP and proposal intelligence", "Built asynchronous document ingestion and layered retrieval, from document discovery to slide/page-level evidence; applied HyDE, multi-hop expansion, RAGAS evaluation and guardrails."],
-  ["GenAI PowerPoint automation", "Contributed to a workflow that finds relevant corporate presentations, matches source material to user documents using RAG, and generates tailored proposal decks—helping reduce RFP preparation time by up to 80%."],
-  ["Enterprise data migration", "Supported a large US airline's Teradata-to-Amazon-Redshift migration and validated downstream Tableau and Alteryx pipelines."]
+  ["Agentic AI platform", "Built the HR-domain agent workflow within a GCP-based multi-agent system, using A2A coordination and MCP-powered enterprise retrieval. Implemented LLM-driven catalogue keyword selection and boosting, sensitive-query guardrails, localization, specialist policy/content agents, semantic reranking and conversation state."],
+  ["RFP proposal intelligence", "Built asynchronous document ingestion and layered retrieval to find relevant proposal material and surface slide- and page-level evidence. Applied HyDE, multi-hop retrieval expansion, RAGAS evaluation and guardrails to support grounded RFP responses."],
+  ["Client-specific RFP template generator", "Built an end-to-end generator that takes a client's website URL, extracts its brand imagery and visual theme, then uses Gemini and Claude LLMs to create a tailored RFP presentation template aligned with the client's identity."]
 ];
 
 const skills = [
