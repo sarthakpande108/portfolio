@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const projects = [
@@ -105,6 +105,32 @@ function ProjectCard({ project }) {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const nav = [["About", "#about"], ["Experience", "#experience"], ["Projects", "#projects"], ["Skills", "#skills"]];
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return undefined;
+
+    const selector = ".about, .experience-card, .section-heading, .project-card, .skill-group, .contact-main, .contact-links";
+    const elements = Array.from(document.querySelectorAll(selector));
+    if (!("IntersectionObserver" in window)) return undefined;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -45px 0px" });
+
+    elements.forEach((element, index) => {
+      element.classList.add("reveal-on-scroll");
+      element.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 90}ms`);
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="site-shell">
       <header className="topbar">
