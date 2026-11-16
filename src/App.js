@@ -1,133 +1,191 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 const projects = [
   {
-    id:"01", type:"PERSONAL / OPEN SOURCE", title:"Embedding Drift Detection",
-    intro:"An open-source Python library that monitors whether the embedding distribution behind a RAG system is changing over time.",
-    problem:"A retrieval system can keep running while its vector distribution drifts, quietly weakening retrieval quality before teams notice a problem.",
-    approach:["Compare reference and current embeddings using Maximum Mean Discrepancy (MMD²) with an RBF kernel.","Measure Wasserstein distance across PCA dimensions to inspect distribution movement.","Apply permutation testing to assess whether observed drift is statistically significant.","Use adaptive sampling to balance monitoring cost and detection sensitivity."],
-    architecture:["Reference vectors","Current vectors","Drift statistics","Significance test","Drift diagnosis"],
-    outcome:"A reusable library for identifying and diagnosing embedding drift, query shift and data staleness in vector-based retrieval systems.",
-    stack:["Python","NumPy","SciPy","scikit-learn","PCA","MMD²","Wasserstein"],
-    repo:"https://github.com/sarthakpande108/embedding-drift-lib", extra:"https://pypi.org/project/embedding-drift-lib/", extraLabel:"PyPI package",
-    note:"Installable Python package. Runs locally without an external service or API key.", visual:"drift"
+    number: "01",
+    category: "OPEN SOURCE · RAG OBSERVABILITY",
+    name: "Embedding Drift Detection",
+    description: "A Python library that helps teams detect when the vector distributions behind a RAG system begin to change.",
+    challenge: "Retrieval quality can quietly degrade as embedding distributions shift, even while the application appears healthy.",
+    details: [
+      "Measures distribution change with MMD² using an RBF kernel.",
+      "Tracks Wasserstein distance across PCA dimensions.",
+      "Uses permutation testing to assess statistical significance.",
+      "Applies adaptive sampling to balance detection quality and monitoring cost."
+    ],
+    flow: ["Reference vectors", "Drift metrics", "Statistical test", "Diagnosis"],
+    tags: ["Python", "NumPy", "SciPy", "scikit-learn", "MMD²", "Wasserstein"],
+    links: [{ label: "GitHub", url: "https://github.com/sarthakpande108/embedding-drift-lib" }, { label: "PyPI", url: "https://pypi.org/project/embedding-drift-lib/" }]
   },
   {
-    id:"02", type:"PERSONAL / FLAGSHIP", title:"GenAI Trading Engine",
-    intro:"An AI-assisted market research and paper-trading system that keeps quantitative calculations separate from LLM-generated interpretation.",
-    problem:"Market analysis needs current data and repeatable calculations. A language model should interpret structured market context, not invent prices or calculate core indicators.",
-    approach:["Fetch Indian equity market data through Angel One SmartAPI.","Calculate technical indicators and risk inputs deterministically in application code.","Pass structured market context to Gemini for constrained research commentary and a directional outlook.","Persist analyses and forecast outcomes in Neon PostgreSQL and support paper-portfolio workflows."],
-    architecture:["Angel One market data","Indicators + risk logic","Gemini structured analysis","Neon persistence","Paper portfolio"],
-    outcome:"A full-stack research workflow with a clear boundary between deterministic market calculations and probabilistic LLM interpretation.",
-    stack:["Node.js","Gemini API","Angel One SmartAPI","Neon PostgreSQL","Vercel"],
-    repo:"https://github.com/sarthakpande108/genai-trading-engine", extra:"https://genai-trading-engine.vercel.app/", extraLabel:"Live application",
-    note:"Research and paper trading only; it does not place live broker orders. The hosted analysis flow requires runtime credentials.", visual:"market"
+    number: "02",
+    category: "PERSONAL PROJECT · FINTECH",
+    name: "GenAI Trading Engine",
+    description: "An AI-assisted market research and paper-trading platform with a deliberate boundary between quantitative logic and LLM interpretation.",
+    challenge: "Market analysis needs reliable data and repeatable calculations. A language model should interpret structured context—not invent prices or indicators.",
+    details: [
+      "Fetches Indian equity market data through Angel One SmartAPI.",
+      "Calculates technical indicators and risk inputs in deterministic application code.",
+      "Uses Gemini for structured research commentary and directional analysis.",
+      "Stores analyses and forecast outcomes in Neon PostgreSQL."
+    ],
+    flow: ["Angel One data", "Indicators + risk", "Gemini analysis", "Neon database"],
+    tags: ["Node.js", "Gemini API", "Angel One", "PostgreSQL", "Vercel"],
+    links: [{ label: "GitHub", url: "https://github.com/sarthakpande108/genai-trading-engine" }, { label: "Live app", url: "https://genai-trading-engine.vercel.app/" }],
+    note: "Research and paper trading only. It does not place live broker orders."
   },
   {
-    id:"03", type:"PERSONAL / AGENTIC AI", title:"Autonomous LinkedIn Content Agent",
-    intro:"A human-in-the-loop agentic workflow that separates content discovery, topic prioritisation and writing into inspectable stages.",
-    problem:"Researching a topic, deciding whether it is worth sharing and drafting a useful post are distinct tasks that benefit from specialised steps and human review.",
-    approach:["Discover relevant source material and candidate topics.","Rank topics using language-model and heuristic signals.","Generate a draft through a dedicated writing stage.","Keep human approval before publishing and trace workflow execution."],
-    architecture:["Discover","Rank","Draft","Human approval"],
-    outcome:"A staged content-creation agent where research, prioritisation and drafting can be inspected independently before a person approves publication.",
-    stack:["Python","LangGraph","LangSmith","Agentic AI"],
-    repo:"https://github.com/sarthakpande108/Linkedin-Automation", visual:"agent"
+    number: "03",
+    category: "PERSONAL PROJECT · AGENTIC AI",
+    name: "Autonomous LinkedIn Content Agent",
+    description: "A human-in-the-loop workflow that separates content discovery, topic ranking and drafting into inspectable stages.",
+    challenge: "Useful content needs research and prioritisation before writing. A single prompt hides those steps and makes quality harder to review.",
+    details: [
+      "Discovers relevant source material and candidate topics.",
+      "Ranks topics using model-based and heuristic signals.",
+      "Generates drafts through a dedicated writing stage.",
+      "Keeps human approval before publication and traces workflow execution."
+    ],
+    flow: ["Discover", "Prioritise", "Draft", "Human review"],
+    tags: ["Python", "LangGraph", "LangSmith", "Agentic AI"],
+    links: [{ label: "GitHub", url: "https://github.com/sarthakpande108/Linkedin-Automation" }]
   }
 ];
 
-const experience = [
- {date:"FEB 2025 — PRESENT",role:"AI / GenAI Engineer",company:"Cognizant Technology Solutions",kind:"Enterprise GenAI",summary:"Building enterprise-grade GenAI solutions across multi-agent orchestration, retrieval-augmented generation, document intelligence and workflow automation.",points:[
-  "Enterprise agentic AI platform: Designed a GCP-based agent workflow with a root orchestrator and specialised domain agents, using A2A for agent coordination and MCP for enterprise tool access.",
-  "HR and policy assistant: Implemented domain-aware keyword selection with BM25 retrieval, limiting search to the most relevant terms and supporting contextual multi-turn conversations through session and event state.",
-  "RFP and proposal intelligence: Built an asynchronous document-ingestion and retrieval workflow with document-level discovery followed by slide/page-level evidence retrieval; applied HyDE and multi-hop expansion, with RAGAS evaluation and guardrails.",
-  "GenAI PowerPoint automation: Contributed to a workflow that retrieves relevant corporate presentations, matches source material to user-provided documents using RAG, and generates tailored proposal presentations—helping reduce RFP preparation time by up to 80%.",
-  "Enterprise data migration: Supported a large US airline migration from Teradata to Amazon Redshift, validating downstream Tableau and Alteryx data pipelines."
- ]}
+const experiencePoints = [
+  ["Agentic AI platform", "Designed a GCP-based workflow with a root orchestrator and specialised domain agents, using A2A for coordination and MCP for enterprise tool access."],
+  ["HR and policy assistant", "Implemented domain-aware keyword selection with BM25 retrieval, plus session and event state for contextual multi-turn conversations."],
+  ["RFP and proposal intelligence", "Built asynchronous document ingestion and layered retrieval, from document discovery to slide/page-level evidence; applied HyDE, multi-hop expansion, RAGAS evaluation and guardrails."],
+  ["GenAI PowerPoint automation", "Contributed to a workflow that finds relevant corporate presentations, matches source material to user documents using RAG, and generates tailored proposal decks—helping reduce RFP preparation time by up to 80%."],
+  ["Enterprise data migration", "Supported a large US airline's Teradata-to-Amazon-Redshift migration and validated downstream Tableau and Alteryx pipelines."]
 ];
 
-const stack = [
- ["Backend development","Python","FastAPI","Node.js","REST APIs","SQL","PostgreSQL","Async processing","Docker","Git"],
- ["LLM & RAG engineering","LLMs","RAG","Embeddings","Vector databases","ChromaDB","LangChain","LlamaIndex","BM25","HyDE","Multi-hop retrieval","RAGAS"],
- ["Agentic AI & orchestration","LangGraph","Multi-agent systems","A2A","MCP","Tool calling","Agent orchestration","Session & event state","Human-in-the-loop"],
- ["Machine learning & data","Transformers","scikit-learn","Pandas","NumPy","PCA","Statistical testing"],
- ["Cloud & AI infrastructure","Google Cloud","Vertex AI","Azure OpenAI","Azure AI Search","AWS SageMaker","Neon PostgreSQL","Vercel"]
+const skills = [
+  { title: "LLM applications", items: ["LLMs", "RAG", "Embeddings", "Vector databases", "LangChain", "LlamaIndex", "HyDE", "RAGAS", "BM25"] },
+  { title: "Agentic systems", items: ["LangGraph", "Multi-agent orchestration", "A2A", "MCP", "Tool calling", "Human-in-the-loop", "Session state"] },
+  { title: "Backend engineering", items: ["Python", "FastAPI", "Node.js", "REST APIs", "SQL", "PostgreSQL", "Async processing", "Docker", "Git"] },
+  { title: "ML & infrastructure", items: ["Transformers", "scikit-learn", "Pandas", "NumPy", "PCA", "Google Cloud", "Vertex AI", "Azure AI", "AWS SageMaker"] }
 ];
 
-function SectionLabel({n,children}) { return <div className="section-label"><span>{n}</span><i/><b>{children}</b></div>; }
-function Diagram({kind,items}) {
- return <div className={"diagram "+kind} role="img" aria-label={"Animated conceptual architecture: "+items.join(" flows to ")}>
-   <div className="diagram-caption"><span className="diagram-live-dot"/> LIVE SYSTEM FLOW <span> / CONCEPTUAL ARCHITECTURE</span></div>
-   <div className="diagram-flow">{items.map((item,i)=><React.Fragment key={item}><div className={"diagram-node "+(i===Math.floor(items.length/2)?"active":"")} style={{"--node-index":i}}><small>0{i+1} <span> / {i===0?"INPUT":i===items.length-1?"OUTPUT":"PROCESS"}</span></small><b>{item}</b><i className="node-status"/></div>{i<items.length-1&&<span className="diagram-arrow" aria-hidden="true"><i/></span>}</React.Fragment>)}</div>
-   <div className="diagram-foot"><span className="signal"/> <span>Data moves left to right</span><span className="diagram-foot-note">Illustrative architecture · not a live telemetry feed</span></div>
- </div>;
+function Eyebrow({ children }) {
+  return <div className="eyebrow"><span />{children}</div>;
 }
-function Project({project}) {
- const [open,setOpen]=useState(project.id==="01");
- return <article className="case-study" id={"project-"+project.id}>
-   <div className="case-top"><span>{project.id} / {project.type}</span><span className="case-mark">{project.visual==="drift"?"RAG OBSERVABILITY":project.visual==="market"?"QUANT + GENAI":"SYSTEM DESIGN"}</span></div>
-   <div className="case-intro"><div><h3>{project.title}<span>.</span></h3><p>{project.intro}</p></div></div>
-   <div className="architecture-line"><span>Architecture</span><p>{project.architecture.join("  →  ")}</p></div>
-   <div className="case-summary"><div><small>THE PROBLEM</small><p>{project.problem}</p></div><div><small>WHAT I BUILT</small><p>{project.outcome}</p></div></div>
-   <button className="expand-button" onClick={()=>setOpen(!open)} aria-expanded={open}><span>{open?"Close technical breakdown":"Explore technical breakdown"}</span><b>{open?"−":"+"}</b></button>
-   {open&&<div className="case-details"><div><small>ENGINEERING APPROACH</small><ol>{project.approach.map((item,i)=><li key={item}><span>0{i+1}</span>{item}</li>)}</ol></div><div className="case-stack"><small>TECHNOLOGIES</small><div>{project.stack.map(s=><span key={s}>{s}</span>)}</div>{project.note&&<p className="project-note">{project.note}</p>}</div></div>}
-   <div className="case-links">{project.repo&&<a href={project.repo} target="_blank" rel="noreferrer">Source code ↗</a>}{project.extra&&<a href={project.extra} target="_blank" rel="noreferrer">{project.extraLabel} ↗</a>}{project.href&&<a href={project.href} target="_blank" rel="noreferrer">Open project ↗</a>}</div>
- </article>;
+
+function ProjectCard({ project }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <article className="project-card">
+      <div className="project-card-top"><span>{project.number}</span><span>{project.category}</span></div>
+      <h3>{project.name}</h3>
+      <p className="project-description">{project.description}</p>
+      <div className="project-flow">
+        {project.flow.map((step, index) => <React.Fragment key={step}>
+          <span className="flow-step">{step}</span>
+          {index < project.flow.length - 1 && <span className="flow-arrow">→</span>}
+        </React.Fragment>)}
+      </div>
+      <div className="project-challenge"><b>THE PROBLEM</b><p>{project.challenge}</p></div>
+      {expanded && <div className="project-details">
+        <b>ENGINEERING NOTES</b>
+        <ul>{project.details.map(detail => <li key={detail}>{detail}</li>)}</ul>
+        {project.note && <p className="project-note">{project.note}</p>}
+      </div>}
+      <div className="project-bottom">
+        <button className="text-button" onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>
+          {expanded ? "Hide technical details" : "View technical details"} <span>{expanded ? "−" : "+"}</span>
+        </button>
+        <div className="project-links">{project.links.map(link => <a key={link.label} href={link.url} target="_blank" rel="noreferrer">{link.label} ↗</a>)}</div>
+      </div>
+      <div className="tag-list">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+    </article>
+  );
 }
 
 export default function App() {
- const [menu,setMenu]=useState(false);
- useEffect(() => {
-   const selector = [
-     ".hero-status", ".hero h1", ".hero-statement", ".hero-bottom",
-     ".section-label", ".about-copy > *", ".about-facts > div",
-     ".section-heading > *", ".experience-item", ".case-study",
-     ".case-intro > *", ".diagram", ".case-summary > div",
-     ".expand-button", ".case-details > div", ".case-links > a",
-     ".stack-grid article", ".principle-grid article", ".contact > *"
-   ].join(",");
-   const targets = Array.from(document.querySelectorAll(selector));
-   if (!targets.length) return;
-   if (!("IntersectionObserver" in window)) {
-     targets.forEach(el => el.classList.add("scroll-revealed"));
-     return;
-   }
+  const [menuOpen, setMenuOpen] = useState(false);
+  const nav = [["About", "#about"], ["Experience", "#experience"], ["Projects", "#projects"], ["Skills", "#skills"]];
+  return (
+    <div className="site-shell">
+      <header className="topbar">
+        <a className="brand" href="#top" aria-label="Sarthak Pande home">SP<span>.</span></a>
+        <nav className={menuOpen ? "main-nav nav-visible" : "main-nav"}>
+          {nav.map(([label, href]) => <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
+          <a className="nav-cta" href="#contact" onClick={() => setMenuOpen(false)}>Contact <span>↗</span></a>
+        </nav>
+        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? "✕" : "☰"}</button>
+      </header>
 
-   const observer = new IntersectionObserver(entries => {
-     entries.forEach(entry => {
-       if (entry.isIntersecting) {
-         entry.target.classList.add("scroll-revealed");
-         observer.unobserve(entry.target);
-       }
-     });
-   }, { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
+      <main id="top">
+        <section className="hero section-wrap">
+          <div className="hero-copy">
+            <div className="hero-kicker"><span className="availability-dot" /> BACKEND AI ENGINEER <i /> PUNE, INDIA</div>
+            <h1>Hi, I'm <span>Sarthak<br className="desktop-break" /> Pande.</span></h1>
+            <p className="hero-lede">I build the <strong>backend systems behind useful AI</strong> — retrieval pipelines, LLM applications, multi-agent workflows and the APIs that bring them together.</p>
+            <div className="hero-actions">
+              <a className="button-primary" href="#projects">Explore my work <span>↘</span></a>
+              <a className="button-secondary" href="mailto:sarthakpande1008@gmail.com">Get in touch <span>↗</span></a>
+            </div>
+            <div className="hero-meta"><span>AI / GENAI ENGINEER</span><i /> <span>COGNIZANT · FEB 2025—PRESENT</span></div>
+          </div>
+          <aside className="hero-aside">
+            <div className="aside-label">WHAT I WORK ON</div>
+            <div className="focus-list">
+              <div><span>01</span><b>Retrieval & RAG</b><small>Grounded answers, better context</small></div>
+              <div><span>02</span><b>Agentic systems</b><small>Tools, orchestration, state</small></div>
+              <div><span>03</span><b>AI backend engineering</b><small>Reliable services and integrations</small></div>
+            </div>
+            <div className="aside-foot"><span>BUILDING IN PROGRESS</span><span className="tiny-spark">✳</span></div>
+          </aside>
+          <div className="hero-scroll">SCROLL TO EXPLORE <span>↓</span></div>
+        </section>
 
-   targets.forEach((el, index) => {
-     el.classList.add("scroll-reveal");
-     // Small stagger within groups; cap it so large sections don't feel sluggish.
-     const siblingIndex = Array.from(el.parentElement?.children || []).indexOf(el);
-     el.style.setProperty("--reveal-delay", `${Math.min(siblingIndex, 4) * 85}ms`);
-     observer.observe(el);
-   });
+        <section className="about section-wrap" id="about">
+          <div className="section-intro"><Eyebrow>01 / ABOUT</Eyebrow><h2>Engineering first.<br/><em>AI where it helps.</em></h2></div>
+          <div className="about-body">
+            <p className="about-lead">I'm a backend-focused AI engineer interested in making intelligent systems useful, measurable and dependable.</p>
+            <p>My work spans retrieval-augmented generation, multi-agent systems and applied machine learning. I enjoy solving the engineering problems underneath an AI product: selecting the right context, choosing tools, managing state, grounding responses and evaluating whether the system is actually working.</p>
+            <div className="about-facts">
+              <div><span>EDUCATION</span><b>B.E. · AI & Data Science</b><small>Savitribai Phule Pune University</small></div>
+              <div><span>LOCATION</span><b>Pune, Maharashtra</b><small>India</small></div>
+              <div><span>FOCUS</span><b>Backend AI / GenAI</b><small>RAG · Agents · AI infrastructure</small></div>
+            </div>
+          </div>
+        </section>
 
-   return () => observer.disconnect();
- }, []);
- return <div className="portfolio">
-  <header className="site-header"><a className="monogram" href="#home">SP<span>.</span></a><nav className={menu?"nav-open":""}>{[["About","#about"],["Experience","#experience"],["Projects","#projects"],["Stack","#stack"]].map(([label,href])=><a href={href} key={href} onClick={()=>setMenu(false)}>{label}</a>)}<a className="nav-contact" href="#contact" onClick={()=>setMenu(false)}>Let's talk ↗</a></nav><button className="mobile-menu" onClick={()=>setMenu(!menu)} aria-label="Toggle menu">{menu?"×":"☰"}</button></header>
-  <main id="home">
-   <section className="hero">
-    <div className="hero-status">Backend AI Engineer <span>Based in Pune, India</span></div>
-    <h1>Sarthak<br/><em>Pande</em><span className="period">.</span></h1>
-    <p className="hero-statement">I build <strong>backend systems for AI</strong> — from LLM integrations and RAG pipelines to multi-agent orchestration, APIs and enterprise AI workflows.</p>
-    <div className="hero-bottom"><div className="hero-location"><span className="avatar-mark">SP</span><div><b>Backend AI Engineer</b><small>Cognizant Technology Solutions</small></div></div><a href="#projects" className="scroll-link">SCROLL TO EXPLORE ↓</a></div>
-    <div className="hero-index">PORTFOLIO · 2026</div>
-   </section>
-   <section id="about" className="section about"><SectionLabel n="01">WHO I AM</SectionLabel><div className="about-copy"><h2>I’m a Backend AI Engineer focused on making intelligent systems <em>useful, measurable and dependable.</em></h2><p>My work sits across retrieval-augmented generation, multi-agent systems and applied machine learning. I care about the engineering beneath the interface: how information is indexed, how an agent chooses a tool, how an answer is grounded, and how we know a system is behaving correctly.</p><p>At Cognizant, I work on enterprise GenAI workflows. Outside that work, I build and publish tools such as Embedding Drift Detection and experiment with AI-assisted financial research systems.</p><div className="about-facts"><div><small>NOW</small><b>Backend AI Engineer</b><span>Cognizant · Feb 2025 — Present</span></div><div><small>BASED IN</small><b>Pune</b><span>Maharashtra, India</span></div><div><small>EDUCATION</small><b>B.E. — AI & Data Science</b><span>Savitribai Phule Pune University</span></div></div></div></section>
-   <section id="experience" className="section experience"><SectionLabel n="02">EXPERIENCE</SectionLabel><div className="section-heading"><h2>Professional<br/><em>experience.</em></h2><p>Backend AI engineering and enterprise systems I’ve worked on at Cognizant.</p></div><div className="experience-list">{experience.map((e,i)=><article className="experience-item" key={e.company}><div className="experience-date">{e.date}<span>0{i+1}</span></div><div className="experience-main"><div className="experience-heading"><div><h3>{e.company}</h3><b>{e.role}</b></div><span>{e.kind}</span></div><p className="experience-summary">{e.summary}</p><ul>{e.points.map(p=><li key={p}>{p}</li>)}</ul></div></article>)}</div></section>
-   <section id="projects" className="section projects"><SectionLabel n="03">SELECTED PROJECTS</SectionLabel><div className="section-heading"><h2>Built from the<br/><em>problem outward.</em></h2><p>Each project starts with a concrete engineering problem, then makes the architecture and trade-offs visible.</p></div><div className="project-list">{projects.map(p=><Project key={p.id} project={p}/>)}</div></section>
-   <section id="stack" className="section stack-section"><SectionLabel n="04">TOOLS & CAPABILITIES</SectionLabel><div className="section-heading"><h2>The tools behind<br/><em>the systems.</em></h2><p>A practical toolkit for building AI backends: APIs, retrieval pipelines, agent orchestration, ML and cloud infrastructure.</p></div><div className="stack-grid">{stack.map(([name,...items],i)=><article key={name}><small>0{i+1} / CAPABILITY</small><h3>{name}</h3><div>{items.map(s=><span key={s}>{s}</span>)}</div></article>)}</div></section>
-   <section className="section principles"><SectionLabel n="05">ENGINEERING PRINCIPLES</SectionLabel><div className="principle-grid"><article><b>01</b><h3>Deterministic where it matters.</h3><p>Keep calculations, constraints and validation in code. Use models for interpretation and synthesis where they add value.</p></article><article><b>02</b><h3>Retrieval is a product decision.</h3><p>Search quality, context selection and evidence traceability shape the quality of every downstream answer.</p></article><article><b>03</b><h3>Observe before it breaks.</h3><p>Evaluate outputs and monitor system behaviour instead of treating a successful response as proof of reliability.</p></article></div></section>
-   <section id="contact" className="section contact"><SectionLabel n="06">GET IN TOUCH</SectionLabel><h2>Let’s build something<br/><em>that matters.</em></h2><p>Open to Backend AI Engineer opportunities focused on Python services, LLM applications, RAG systems, agentic workflows and AI infrastructure.</p><a className="email-link" href="mailto:sarthakpande1008@gmail.com">sarthakpande1008@gmail.com ↗</a><div className="social-links"><a href="https://www.linkedin.com/in/sarthakpande108/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/sarthakpande108" target="_blank" rel="noreferrer">GitHub ↗</a><a href="/Sarthak_Pande_GenAI_Resume.pdf" target="_blank" rel="noreferrer">Resume PDF ↗</a></div></section>
-  </main><footer><span>© {new Date().getFullYear()} SARTHAK PANDE</span><span>BUILT AROUND THE WORK.</span><a href="#home">BACK TO TOP ↑</a></footer>
- </div>;
+        <section className="experience section-wrap" id="experience">
+          <div className="section-heading"><div><Eyebrow>02 / EXPERIENCE</Eyebrow><h2>Where I work<span>.</span></h2></div><p>Enterprise AI engineering at scale, with a focus on retrieval, orchestration and workflow automation.</p></div>
+          <article className="experience-card">
+            <div className="experience-company">
+              <div className="company-mark">C</div>
+              <div><h3>Cognizant</h3><p>Technology Solutions</p></div>
+              <span className="experience-period">FEB 2025 — PRESENT</span>
+            </div>
+            <div className="experience-content">
+              <div className="role-line"><b>AI / GenAI Engineer</b><span>Enterprise GenAI</span></div>
+              <p className="experience-intro">Building enterprise-grade GenAI solutions across multi-agent orchestration, retrieval-augmented generation, document intelligence and workflow automation.</p>
+              <div className="work-list">{experiencePoints.map(([title, description], index) => <div className="work-item" key={title}><span>0{index + 1}</span><div><b>{title}</b><p>{description}</p></div></div>)}</div>
+            </div>
+          </article>
+        </section>
+
+        <section className="projects section-wrap" id="projects">
+          <div className="section-heading"><div><Eyebrow>03 / SELECTED WORK</Eyebrow><h2>Things I've built<span>.</span></h2></div><p>Personal projects and open-source work. Each one starts with a real engineering problem.</p></div>
+          <div className="project-grid">{projects.map(project => <ProjectCard key={project.number} project={project}/>)}</div>
+        </section>
+
+        <section className="skills section-wrap" id="skills">
+          <div className="section-heading"><div><Eyebrow>04 / TOOLKIT</Eyebrow><h2>How I build<span>.</span></h2></div><p>A practical toolkit for designing and shipping AI-powered backend systems.</p></div>
+          <div className="skills-grid">{skills.map((group, index) => <article className="skill-group" key={group.title}><span className="skill-number">0{index + 1}</span><h3>{group.title}</h3><div className="tag-list">{group.items.map(item => <span key={item}>{item}</span>)}</div></article>)}</div>
+        </section>
+
+        <section className="contact section-wrap" id="contact">
+          <Eyebrow>05 / CONTACT</Eyebrow>
+          <div className="contact-main"><h2>Have a good<br/><em>problem to solve?</em></h2><div><p>I'm open to Backend AI Engineer opportunities involving Python services, LLM applications, RAG systems, agentic workflows and AI infrastructure.</p><a className="contact-email" href="mailto:sarthakpande1008@gmail.com">sarthakpande1008@gmail.com ↗</a></div></div>
+          <div className="contact-links"><a href="https://www.linkedin.com/in/sarthakpande108/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/sarthakpande108" target="_blank" rel="noreferrer">GitHub ↗</a><a href="/Sarthak_Pande_GenAI_Resume.pdf" target="_blank" rel="noreferrer">Resume PDF ↗</a></div>
+        </section>
+      </main>
+      <footer className="site-footer"><span>© {new Date().getFullYear()} SARTHAK PANDE</span><span>DESIGNED & BUILT WITH CARE</span><a href="#top">BACK TO TOP ↑</a></footer>
+    </div>
+  );
 }
