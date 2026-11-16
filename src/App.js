@@ -79,11 +79,17 @@ function ProjectCard({ project }) {
       <div className="project-card-top"><span>{project.number}</span><span>{project.category}</span></div>
       <h3>{project.name}</h3>
       <p className="project-description">{project.description}</p>
-      <div className="project-flow">
-        {project.flow.map((step, index) => <React.Fragment key={step}>
-          <span className="flow-step">{step}</span>
-          {index < project.flow.length - 1 && <span className="flow-arrow">→</span>}
-        </React.Fragment>)}
+      <div className="project-flow" aria-label={`Workflow: ${project.flow.join(" to ")}`}>
+        <div className="flow-track">
+          {project.flow.map((step, index) => <React.Fragment key={step}>
+            <div className={`flow-node flow-node-${index + 1}`}>
+              <span className="flow-node-index">0{index + 1}</span>
+              <span className="flow-step">{step}</span>
+            </div>
+            {index < project.flow.length - 1 && <span className="flow-connector" aria-hidden="true"><i /></span>}
+          </React.Fragment>)}
+        </div>
+        <span className="flow-caption">SYSTEM FLOW <span>● LIVE PATH</span></span>
       </div>
       <div className="project-challenge"><b>THE PROBLEM</b><p>{project.challenge}</p></div>
       {expanded && <div className="project-details">
