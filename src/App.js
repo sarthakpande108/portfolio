@@ -184,7 +184,7 @@ export default function App() {
         <section className="hero section-wrap">
           <div className="hero-copy">
             <div className="hero-kicker"><span className="availability-dot" /> BACKEND AI ENGINEER <i /> PUNE, INDIA</div>
-            <h1>Backend AI<br/><span>/ GenAI Engineer.</span></h1>
+            <h1>Hi, I’m <span>Sarthak.</span><br/>Backend AI<br/><span>/ GenAI Engineer.</span></h1>
             <p className="hero-lede">I build production-minded AI backends with <strong>Python, APIs, RAG pipelines, LLM applications and multi-agent orchestration</strong> — from data ingestion to reliable retrieval and response handling.</p>
             <div className="hero-actions">
               <a className="button-primary" href="#projects">Explore my work <span>↘</span></a>
