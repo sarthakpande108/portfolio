@@ -395,3 +395,143 @@
     animation:none!important;
   }
 }
+
+
+/* Readability pass: larger body copy, labels and technical diagrams */
+body { font-size:16px; }
+.main-nav { font-size:15px; }
+.hero-kicker { font-size:12px; }
+.hero-lede { font-size:clamp(18px,1.9vw,22px); line-height:1.72; }
+.button-primary,.button-secondary { font-size:14px; padding:15px 20px; }
+.hero-meta { font-size:11px; }
+.aside-label { font-size:11px; }
+.focus-list b { font-size:17px; }
+.focus-list small { font-size:13px; line-height:1.55; }
+.aside-foot { font-size:10px; }
+.hero-scroll { font-size:10px; }
+.eyebrow { font-size:11px; }
+.section-intro h2,.section-heading h2 { font-size:clamp(40px,5vw,62px); }
+.about-lead { font-size:23px; }
+.about-body>p:not(.about-lead) { font-size:16px; line-height:1.85; }
+.about-facts span { font-size:11px; }
+.about-facts b { font-size:14px; }
+.about-facts small { font-size:12px; }
+.section-heading>p { font-size:15px; line-height:1.8; max-width:420px; }
+.experience-company h3 { font-size:23px; }
+.experience-company p { font-size:14px; }
+.experience-period { font-size:10px; }
+.role-line b { font-size:19px; }
+.role-line span { font-size:11px; }
+.experience-intro { font-size:15px; line-height:1.85; }
+.work-item { grid-template-columns:40px 1fr; padding:19px 0; }
+.work-item>span { font-size:12px; }
+.work-item b { font-size:15px; }
+.work-item p { font-size:14px; line-height:1.8; }
+.project-card { padding:29px; }
+.project-card-top { font-size:10px; }
+.project-card h3 { font-size:clamp(24px,2.8vw,32px); }
+.project-description { font-size:15px; line-height:1.8; }
+.flow-step { font-size:11px; }
+.flow-arrow { font-size:14px; }
+.project-challenge>b,.project-details>b { font-size:10px; }
+.project-challenge p,.project-details li { font-size:14px; line-height:1.8; }
+.project-note { font-size:12px; }
+.text-button,.project-links a { font-size:13px; }
+.skill-number { font-size:11px; }
+.skill-group h3 { font-size:19px; }
+.tag-list { gap:8px; }
+.tag-list span { font-size:10px; padding:8px 10px; }
+.contact-main h2 { font-size:clamp(48px,6.5vw,80px); }
+.contact-main>div>p { font-size:15px; line-height:1.85; }
+.contact-email { font-size:19px; }
+.contact-links a { font-size:12px; }
+.site-footer { font-size:10px; }
+
+/* Make the agent architecture legible at presentation size */
+.case-study-kicker,.case-detail-label,.case-study-contribution>span { font-size:10px; }
+.case-study-heading h3 { font-size:clamp(25px,2.8vw,34px); }
+.case-study-lede { font-size:14px; line-height:1.8; }
+.hr-flow-panel-label { font-size:10px; }
+.hr-flow-node { padding:16px 20px 17px 60px; }
+.hr-flow-node>span { font-size:11px; }
+.hr-flow-node h4 { font-size:15px; }
+.hr-flow-node p { font-size:12px; line-height:1.65; }
+.hr-flow-down small { font-size:9px; width:190px; }
+.hr-flow-subnode { padding:15px 12px; }
+.hr-flow-subnode b { font-size:13px; }
+.hr-flow-subnode p { font-size:11px; line-height:1.6; }
+.hr-flow-boost b { font-size:13px; }
+.hr-flow-boost span { font-size:11px; }
+.hr-flow-decision b { font-size:13px; }
+.hr-flow-decision small { font-size:9px; max-width:140px; }
+.hr-flow-outcome b { font-size:13px; }
+.hr-flow-outcome span { font-size:10px; }
+.hr-flow-state { font-size:11px; line-height:1.8; }
+.hr-flow-state span { font-size:10px; }
+.case-study-detail { padding:18px; }
+.case-study-detail b { font-size:14px; }
+.case-study-detail p { font-size:12px; line-height:1.8; }
+.case-study-contribution p { font-size:13px; line-height:1.85; }
+.case-study-footnote { font-size:10px; line-height:1.7; }
+
+@media(max-width:850px) {
+  .hero-lede { font-size:18px; }
+  .section-heading>p { font-size:14px; }
+  .work-item p { font-size:13px; }
+  .project-description { font-size:14px; }
+}
+@media(max-width:620px) {
+  .main-nav { font-size:16px; }
+  .hero-kicker { font-size:10px; }
+  .hero-lede { font-size:17px; }
+  .button-primary,.button-secondary { font-size:12px; padding:13px 14px; }
+  .hero-meta { font-size:9px; }
+  .focus-list b { font-size:15px; }
+  .focus-list small { font-size:12px; }
+  .eyebrow { font-size:10px; }
+  .section-intro h2,.section-heading h2 { font-size:42px; }
+  .about-lead { font-size:20px; }
+  .about-body>p:not(.about-lead) { font-size:14px; line-height:1.85; }
+  .about-facts span { font-size:10px; }
+  .about-facts b { font-size:13px; }
+  .about-facts small { font-size:11px; }
+  .section-heading>p { font-size:13px; }
+  .experience-company h3 { font-size:19px; }
+  .experience-company p { font-size:12px; }
+  .experience-period { font-size:8px; }
+  .role-line b { font-size:17px; }
+  .experience-intro { font-size:13px; }
+  .work-item b { font-size:13px; }
+  .work-item p { font-size:12px; }
+  .project-card h3 { font-size:24px; }
+  .project-description { font-size:13px; }
+  .project-challenge p,.project-details li { font-size:12px; }
+  .flow-step { font-size:9px; }
+  .project-links a,.text-button { font-size:11px; }
+  .skill-group h3 { font-size:17px; }
+  .tag-list span { font-size:9px; padding:7px 8px; }
+  .contact-main h2 { font-size:50px; }
+  .contact-main>div>p { font-size:13px; }
+  .contact-email { font-size:15px; }
+  .contact-links a { font-size:10px; }
+  .case-study-heading h3 { font-size:25px; }
+  .case-study-lede { font-size:12px; }
+  .hr-flow-node { padding:13px 10px 13px 43px; }
+  .hr-flow-node>span { left:10px; font-size:10px; }
+  .hr-flow-node h4 { font-size:13px; }
+  .hr-flow-node p { font-size:10px; }
+  .hr-flow-down small { font-size:7px; width:120px; }
+  .hr-flow-subnode { padding:11px 5px; }
+  .hr-flow-subnode b { font-size:10px; }
+  .hr-flow-subnode p { font-size:9px; }
+  .hr-flow-boost b { font-size:11px; }
+  .hr-flow-boost span { font-size:9px; }
+  .hr-flow-decision b { font-size:11px; }
+  .hr-flow-decision small { font-size:8px; }
+  .hr-flow-outcome b { font-size:10px; }
+  .hr-flow-outcome span { font-size:8px; }
+  .hr-flow-state { font-size:9px; }
+  .case-study-detail b { font-size:13px; }
+  .case-study-detail p { font-size:11px; }
+  .case-study-contribution p { font-size:11px; }
+}
