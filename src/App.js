@@ -20,7 +20,7 @@ const projects = [
   },
   {
     number: "02",
-    category: "PERSONAL PROJECT · FINTECH",
+    category: "COMPLETED · FINTECH",
     name: "GenAI Trading Engine",
     description: "An AI-assisted market research and paper-trading platform with a deliberate boundary between quantitative logic and LLM interpretation.",
     challenge: "Market analysis needs reliable data and repeatable calculations. A language model should interpret structured context—not invent prices or indicators.",
@@ -33,7 +33,7 @@ const projects = [
     flow: ["Angel One data", "Indicators + risk", "Gemini analysis", "Neon database"],
     tags: ["Node.js", "Gemini API", "Angel One", "PostgreSQL", "Vercel"],
     links: [{ label: "GitHub", url: "https://github.com/sarthakpande108/genai-trading-engine" }, { label: "Live app", url: "https://genai-trading-engine.vercel.app/" }],
-    note: "Research and paper trading only. It does not place live broker orders."
+    note: "Completed and deployed. Research and paper trading only; it does not place live broker orders."
   },
   {
     number: "03",
@@ -81,62 +81,24 @@ function AgenticCaseStudy() {
       <div><span className="case-study-kicker">FEATURED SYSTEM · AGENTIC AI</span><h3 id="hr-case-title">Enterprise HR intelligence</h3></div>
       <span className="case-study-mark">A2A <i>×</i> MCP</span>
     </div>
-    <p className="case-study-lede">A domain-oriented, multi-agent workflow for answering enterprise HR and policy questions with context-aware retrieval, sensitive-query guardrails and relevance-controlled responses.</p>
+    <p className="case-study-lede">A compact view of the HR workflow I engineered: LLM-guided query understanding, specialist retrieval, semantic relevance checks and grounded responses.</p>
 
-    <div className="hr-flowchart" role="img" aria-label="Flowchart showing secure prompt ingress through Apigee, root orchestration, HR A2A domain agent, LLM-driven keyword selection and boosting, policy and HR lookup agents, Liferay MCP search, Google Semantic Reranker, relevance decision and response.">
-      <div className="hr-flow-row single">{node("01", "User query", "Question or conversational follow-up", "user-node")}</div>
+    <div className="hr-flowchart compact-flowchart" role="img" aria-label="Six-stage HR agent workflow: user question, HR domain orchestration, query intelligence and guardrails, specialist agents and Liferay MCP search, semantic reranking and relevance-based response.">
+      <div className="hr-flow-row single">{node("01", "User question", "HR policy or employee query", "user-node")}</div>
       <div className="hr-flow-down"><i /></div>
-      <div className="hr-flow-row single">{node("02", "Apigee gateway", "Prompt ingestion · validation · sensitive-data checks", "gateway-node")}</div>
+      <div className="hr-flow-row single">{node("02", "HR domain orchestration", "A2A session routes the request into my domain workflow", "core-node")}</div>
       <div className="hr-flow-down"><i /></div>
-      <div className="hr-flow-row single">{node("03", "Root orchestrator", "Routes the request to the HR domain via A2A", "external-node")}</div>
-      <div className="hr-flow-down"><i /><small>A2A REQUEST</small></div>
-      <div className="hr-flow-row single">{node("04", "HR domain A2A agent", "Creates the HR-domain session and invokes your domain orchestrator", "agent-node")}</div>
+      <div className="hr-flow-row single"><div className="hr-flow-panel"><span className="hr-flow-panel-label">03 / QUERY INTELLIGENCE & GUARDRAILS</span><div className="hr-flow-columns"><div className="hr-flow-subnode"><b>Keyword selection</b><p>LLM selects up to 3 catalogue terms</p></div><div className="hr-flow-subnode"><b>Safety checks</b><p>Sensitive topics route to fallback</p></div><div className="hr-flow-subnode"><b>Localization</b><p>Adds location-aware context</p></div></div><div className="hr-flow-inline-down"><i /></div><div className="hr-flow-boost"><b>LLM keyword boosting</b><span>Topic, intent and knowledge context refine retrieval</span></div></div></div>
+      <div className="hr-flow-down"><i /><small>RETRIEVAL</small></div>
+      <div className="hr-flow-row single"><div className="hr-flow-panel"><span className="hr-flow-panel-label">04 / SPECIALIST AGENTS + ENTERPRISE SEARCH</span><div className="hr-flow-columns two"><div className="hr-flow-subnode agent-tool"><b>Policy agent</b><p>Policy-focused lookup</p></div><div className="hr-flow-subnode agent-tool"><b>HR content agent</b><p>Knowledge lookup via Liferay MCP</p></div></div><p className="hr-flow-search-note">Lucene search on Elasticsearch · top 5 documents</p></div></div>
       <div className="hr-flow-down"><i /></div>
-      <div className="hr-flow-row single">{node("05", "Your domain orchestrator", "Coordinates query understanding, specialist tools, retrieval and response quality", "core-node")}</div>
+      <div className="hr-flow-row single">{node("05", "Google Semantic Reranker", "Scores retrieved evidence for semantic relevance", "rerank-node")}</div>
       <div className="hr-flow-down"><i /></div>
-      <div className="hr-flow-row single">
-        <div className="hr-flow-panel">
-          <span className="hr-flow-panel-label">QUERY UNDERSTANDING & POLICY GUARDRAILS</span>
-          <div className="hr-flow-columns">
-            <div className="hr-flow-subnode"><b>LLM keyword selection</b><p>Selects up to 3 catalogue keywords</p></div>
-            <div className="hr-flow-subnode"><b>Negative semantic catalogue</b><p>Flags sensitive HR topics for fallback</p></div>
-            <div className="hr-flow-subnode"><b>Localization catalogue</b><p>Adds location-aware retrieval parameters</p></div>
-          </div>
-          <div className="hr-flow-inline-down"><i /></div>
-          <div className="hr-flow-boost"><b>LLM-driven keyword boosting</b><span>Topic + intent + knowledge context guide search emphasis</span></div>
-        </div>
-      </div>
-      <div className="hr-flow-down"><i /><small>SELECTED & BOOSTED SEARCH CONTEXT</small></div>
-      <div className="hr-flow-row single">
-        <div className="hr-flow-panel">
-          <span className="hr-flow-panel-label">SPECIALIST BASE AGENTS · INVOKED AS TOOLS</span>
-          <div className="hr-flow-columns two">
-            <div className="hr-flow-subnode agent-tool"><b>Policy agent</b><p>Policy-focused content lookup</p></div>
-            <div className="hr-flow-subnode agent-tool"><b>HR content lookup agent</b><p>HR knowledge retrieval</p></div>
-          </div>
-        </div>
-      </div>
-      <div className="hr-flow-merge"><span /><i /><span /></div>
-      <div className="hr-flow-row single">{node("06", "Liferay MCP server", "MCP tool access to enterprise content · Lucene search via Elasticsearch", "mcp-node")}</div>
-      <div className="hr-flow-down"><i /><small>TOP 5 MATCHING DOCUMENTS</small></div>
-      <div className="hr-flow-row single">{node("07", "Google Semantic Reranker", "Scores semantic relevance of retrieved documents", "rerank-node")}</div>
-      <div className="hr-flow-down"><i /></div>
-      <div className="hr-flow-row single">
-        <div className="hr-flow-decision"><span>08</span><b>Relevance threshold</b><small>Is the retrieved context sufficiently relevant?</small></div>
-      </div>
-      <div className="hr-flow-outcomes">
-        <div className="hr-flow-outcome full"><b>Full response</b><span>Strong relevance</span></div>
-        <div className="hr-flow-outcome partial"><b>Partial response</b><span>Some relevant evidence</span></div>
-        <div className="hr-flow-outcome fallback"><b>Fallback</b><span>Low relevance or sensitive query</span></div>
-      </div>
-      <div className="hr-flow-state"><span>CONVERSATION STATE</span> Session · conversation context · localization · selected keywords → follow-up questions</div>
+      <div className="hr-flow-row single"><div className="hr-flow-decision"><span>06</span><b>Relevance check</b><small>Does the evidence meet the quality threshold?</small></div></div>
+      <div className="hr-flow-outcomes"><div className="hr-flow-outcome full"><b>Grounded answer</b><span>Strong evidence</span></div><div className="hr-flow-outcome partial"><b>Partial answer</b><span>Limited evidence</span></div><div className="hr-flow-outcome fallback"><b>Fallback</b><span>Low relevance / sensitive</span></div></div>
+      <div className="hr-flow-state"><span>STATE ACROSS TURNS</span> Session · conversation context · localization · selected keywords</div>
     </div>
 
-    <div className="case-study-bottom">
-      <div className="case-study-detail"><span className="case-detail-label">QUERY INTELLIGENCE</span><b>LLM-guided catalogue reasoning</b><p>Selects up to three keywords, applies negative-catalogue checks and adds localization parameters. A second LLM-driven step boosts keywords using topic, intent and knowledge context.</p></div>
-      <div className="case-study-detail"><span className="case-detail-label">RETRIEVAL & QUALITY</span><b>Enterprise search with semantic reranking</b><p>Specialist policy and HR agents call Liferay MCP. Lucene / Elasticsearch returns the top five documents; Google Semantic Reranker evaluates their relevance.</p></div>
-      <div className="case-study-detail"><span className="case-detail-label">CONVERSATION STATE</span><b>Context carried across turns</b><p>Session state retains conversation context, localization and selected keywords to support coherent follow-up questions and suggestions.</p></div>
-    </div>
     <div className="case-study-contribution"><span>MY ENGINEERING CONTRIBUTION</span><p>Implemented the HR-domain orchestration, LLM-based keyword selection and boosting, semantic-catalogue guardrails, localization handling, specialist-agent/MCP retrieval integration, reranker-based relevance handling and conversation state. The upstream root orchestrator was implemented by another team member.</p></div>
     <div className="case-study-footnote">Architecture shown at a system level; internal prompts, thresholds and enterprise implementation details are intentionally not disclosed.</div>
   </section>;
@@ -159,7 +121,7 @@ function ProjectCard({ project }) {
             {index < project.flow.length - 1 && <span className="flow-connector" aria-hidden="true"><i /></span>}
           </React.Fragment>)}
         </div>
-        <span className="flow-caption">SYSTEM FLOW <span>● LIVE PATH</span></span>
+        <span className="flow-caption">ENGINEERING FLOW</span>
       </div>
       <div className="project-challenge"><b>THE PROBLEM</b><p>{project.challenge}</p></div>
       {expanded && <div className="project-details">
@@ -222,8 +184,8 @@ export default function App() {
         <section className="hero section-wrap">
           <div className="hero-copy">
             <div className="hero-kicker"><span className="availability-dot" /> BACKEND AI ENGINEER <i /> PUNE, INDIA</div>
-            <h1>Hi, I'm <span>Sarthak<br className="desktop-break" /> Pande.</span></h1>
-            <p className="hero-lede">I build the <strong>backend systems behind useful AI</strong> — retrieval pipelines, LLM applications, multi-agent workflows and the APIs that bring them together.</p>
+            <h1>Backend AI<br/><span>/ GenAI Engineer.</span></h1>
+            <p className="hero-lede">I build production-minded AI backends with <strong>Python, APIs, RAG pipelines, LLM applications and multi-agent orchestration</strong> — from data ingestion to reliable retrieval and response handling.</p>
             <div className="hero-actions">
               <a className="button-primary" href="#projects">Explore my work <span>↘</span></a>
               <a className="button-secondary" href="mailto:sarthakpande1008@gmail.com">Get in touch <span>↗</span></a>
@@ -233,11 +195,11 @@ export default function App() {
           <aside className="hero-aside">
             <div className="aside-label">WHAT I WORK ON</div>
             <div className="focus-list">
-              <div><span>01</span><b>Retrieval & RAG</b><small>Grounded answers, better context</small></div>
-              <div><span>02</span><b>Agentic systems</b><small>Tools, orchestration, state</small></div>
-              <div><span>03</span><b>AI backend engineering</b><small>Reliable services and integrations</small></div>
+              <div><span>01</span><b>RAG & retrieval</b><small>Ingestion · embeddings · ranking · evaluation</small></div>
+              <div><span>02</span><b>Agentic AI</b><small>LangGraph · A2A · MCP · tool orchestration</small></div>
+              <div><span>03</span><b>Backend engineering</b><small>Python · FastAPI · Node.js · APIs · SQL</small></div>
             </div>
-            <div className="aside-foot"><span>BUILDING IN PROGRESS</span><span className="tiny-spark">✳</span></div>
+            <div className="aside-foot"><span>BACKEND · RAG · AGENTS · ML</span><span className="tiny-spark">✳</span></div>
           </aside>
           <div className="hero-scroll">SCROLL TO EXPLORE <span>↓</span></div>
         </section>

@@ -535,3 +535,18 @@ body { font-size:16px; }
   .case-study-detail p { font-size:11px; }
   .case-study-contribution p { font-size:11px; }
 }
+
+
+/* Compact architecture: preserve the animated data path without excess height */
+.compact-flowchart { padding:20px 16px; }
+.compact-flowchart .hr-flow-down { height:25px; }
+.compact-flowchart .hr-flow-node { animation-duration:.45s; }
+.compact-flowchart .hr-flow-panel { padding:14px; }
+.compact-flowchart .hr-flow-search-note { margin:10px 0 0; text-align:center; color:#987c88; font:9px var(--mono); letter-spacing:.04em; }
+.compact-flowchart .hr-flow-outcomes { margin-top:14px; }
+.compact-flowchart .hr-flow-state { margin-top:12px; }
+@media(max-width:620px) {
+  .compact-flowchart { padding:13px 7px; }
+  .compact-flowchart .hr-flow-down { height:21px; }
+  .compact-flowchart .hr-flow-search-note { font-size:7px; }
+}
