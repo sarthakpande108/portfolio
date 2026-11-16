@@ -73,50 +73,73 @@ function Eyebrow({ children }) {
 }
 
 function AgenticCaseStudy() {
-  const stages = [
-    { n: "01", title: "Secure ingress", detail: "Apigee validates incoming prompts and checks for sensitive data." },
-    { n: "02", title: "Root routing", detail: "The separately implemented root orchestrator routes the request to the HR domain through A2A." },
-    { n: "03", title: "HR domain session", detail: "The HR A2A agent establishes its domain session and invokes the domain orchestrator." },
-    { n: "04", title: "LLM query intelligence", detail: "The domain orchestrator selects up to three catalogue keywords; negative and localization catalogues add safety and location context." },
-    { n: "05", title: "Intent-aware boosting", detail: "The LLM boosts selected keywords using topic, intent and knowledge context before retrieval." },
-    { n: "06", title: "Agent + MCP retrieval", detail: "Policy and HR content lookup base agents are invoked as tools. The Liferay MCP server searches through Lucene / Elasticsearch and returns up to five documents." },
-    { n: "07", title: "Semantic evaluation", detail: "Google Semantic Reranker evaluates the retrieved documents for relevance." },
-    { n: "08", title: "Response control", detail: "A relevance threshold determines whether the system returns a full answer, a partial answer or a fallback." }
-  ];
+  const node = (number, title, detail, tone = "") => (
+    <article className={`hr-flow-node ${tone}`}>
+      <span>{number}</span><h4>{title}</h4><p>{detail}</p>
+    </article>
+  );
   return <section className="agentic-case-study" aria-labelledby="hr-case-title">
     <div className="case-study-heading">
       <div><span className="case-study-kicker">FEATURED SYSTEM · AGENTIC AI</span><h3 id="hr-case-title">Enterprise HR intelligence</h3></div>
       <span className="case-study-mark">A2A <i>×</i> MCP</span>
     </div>
     <p className="case-study-lede">A domain-oriented, multi-agent workflow for answering enterprise HR and policy questions with context-aware retrieval, sensitive-query guardrails and relevance-controlled responses.</p>
-    <div className="case-study-flow" aria-label="Enterprise HR intelligence request flow">
-      {stages.map((stage, index) => <React.Fragment key={stage.n}>
-        <article className="case-stage">
-          <span className="case-stage-number">{stage.n}</span>
-          <h4>{stage.title}</h4>
-          <p>{stage.detail}</p>
-        </article>
-        {index < stages.length - 1 && <span className="case-stage-link" aria-hidden="true"><i /></span>}
-      </React.Fragment>)}
+
+    <div className="hr-flowchart" role="img" aria-label="Flowchart showing secure prompt ingress through Apigee, root orchestration, HR A2A domain agent, LLM-driven keyword selection and boosting, policy and HR lookup agents, Liferay MCP search, Google Semantic Reranker, relevance decision and response.">
+      <div className="hr-flow-row single">{node("01", "User query", "Question or conversational follow-up", "user-node")}</div>
+      <div className="hr-flow-down"><i /></div>
+      <div className="hr-flow-row single">{node("02", "Apigee gateway", "Prompt ingestion · validation · sensitive-data checks", "gateway-node")}</div>
+      <div className="hr-flow-down"><i /></div>
+      <div className="hr-flow-row single">{node("03", "Root orchestrator", "Routes the request to the HR domain via A2A", "external-node")}</div>
+      <div className="hr-flow-down"><i /><small>A2A REQUEST</small></div>
+      <div className="hr-flow-row single">{node("04", "HR domain A2A agent", "Creates the HR-domain session and invokes your domain orchestrator", "agent-node")}</div>
+      <div className="hr-flow-down"><i /></div>
+      <div className="hr-flow-row single">{node("05", "Your domain orchestrator", "Coordinates query understanding, specialist tools, retrieval and response quality", "core-node")}</div>
+      <div className="hr-flow-down"><i /></div>
+      <div className="hr-flow-row single">
+        <div className="hr-flow-panel">
+          <span className="hr-flow-panel-label">QUERY UNDERSTANDING & POLICY GUARDRAILS</span>
+          <div className="hr-flow-columns">
+            <div className="hr-flow-subnode"><b>LLM keyword selection</b><p>Selects up to 3 catalogue keywords</p></div>
+            <div className="hr-flow-subnode"><b>Negative semantic catalogue</b><p>Flags sensitive HR topics for fallback</p></div>
+            <div className="hr-flow-subnode"><b>Localization catalogue</b><p>Adds location-aware retrieval parameters</p></div>
+          </div>
+          <div className="hr-flow-inline-down"><i /></div>
+          <div className="hr-flow-boost"><b>LLM-driven keyword boosting</b><span>Topic + intent + knowledge context guide search emphasis</span></div>
+        </div>
+      </div>
+      <div className="hr-flow-down"><i /><small>SELECTED & BOOSTED SEARCH CONTEXT</small></div>
+      <div className="hr-flow-row single">
+        <div className="hr-flow-panel">
+          <span className="hr-flow-panel-label">SPECIALIST BASE AGENTS · INVOKED AS TOOLS</span>
+          <div className="hr-flow-columns two">
+            <div className="hr-flow-subnode agent-tool"><b>Policy agent</b><p>Policy-focused content lookup</p></div>
+            <div className="hr-flow-subnode agent-tool"><b>HR content lookup agent</b><p>HR knowledge retrieval</p></div>
+          </div>
+        </div>
+      </div>
+      <div className="hr-flow-merge"><span /><i /><span /></div>
+      <div className="hr-flow-row single">{node("06", "Liferay MCP server", "MCP tool access to enterprise content · Lucene search via Elasticsearch", "mcp-node")}</div>
+      <div className="hr-flow-down"><i /><small>TOP 5 MATCHING DOCUMENTS</small></div>
+      <div className="hr-flow-row single">{node("07", "Google Semantic Reranker", "Scores semantic relevance of retrieved documents", "rerank-node")}</div>
+      <div className="hr-flow-down"><i /></div>
+      <div className="hr-flow-row single">
+        <div className="hr-flow-decision"><span>08</span><b>Relevance threshold</b><small>Is the retrieved context sufficiently relevant?</small></div>
+      </div>
+      <div className="hr-flow-outcomes">
+        <div className="hr-flow-outcome full"><b>Full response</b><span>Strong relevance</span></div>
+        <div className="hr-flow-outcome partial"><b>Partial response</b><span>Some relevant evidence</span></div>
+        <div className="hr-flow-outcome fallback"><b>Fallback</b><span>Low relevance or sensitive query</span></div>
+      </div>
+      <div className="hr-flow-state"><span>CONVERSATION STATE</span> Session · conversation context · localization · selected keywords → follow-up questions</div>
     </div>
+
     <div className="case-study-bottom">
-      <div className="case-study-detail">
-        <span className="case-detail-label">QUERY UNDERSTANDING</span>
-        <b>LLM-guided catalogue reasoning</b>
-        <p>Chooses up to three relevant keywords, checks negative semantic patterns for sensitive HR requests, and adds localization parameters where needed. Keyword boosting is also LLM-driven, informed by topic, intent and knowledge context.</p>
-      </div>
-      <div className="case-study-detail">
-        <span className="case-detail-label">RETRIEVAL & QUALITY</span>
-        <b>Enterprise search with semantic reranking</b>
-        <p>Policy and HR content lookup agents call the Liferay MCP integration. Lucene / Elasticsearch retrieves the top five documents; Google Semantic Reranker assesses relevance before answer generation.</p>
-      </div>
-      <div className="case-study-detail">
-        <span className="case-detail-label">CONVERSATION STATE</span>
-        <b>Context carried across turns</b>
-        <p>Session state retains conversation context, localization and selected keywords to support coherent follow-up questions and suggestions.</p>
-      </div>
+      <div className="case-study-detail"><span className="case-detail-label">QUERY INTELLIGENCE</span><b>LLM-guided catalogue reasoning</b><p>Selects up to three keywords, applies negative-catalogue checks and adds localization parameters. A second LLM-driven step boosts keywords using topic, intent and knowledge context.</p></div>
+      <div className="case-study-detail"><span className="case-detail-label">RETRIEVAL & QUALITY</span><b>Enterprise search with semantic reranking</b><p>Specialist policy and HR agents call Liferay MCP. Lucene / Elasticsearch returns the top five documents; Google Semantic Reranker evaluates their relevance.</p></div>
+      <div className="case-study-detail"><span className="case-detail-label">CONVERSATION STATE</span><b>Context carried across turns</b><p>Session state retains conversation context, localization and selected keywords to support coherent follow-up questions and suggestions.</p></div>
     </div>
-    <div className="case-study-contribution"><span>MY ENGINEERING CONTRIBUTION</span><p>Implemented the HR-domain orchestration and its query-understanding, retrieval, relevance-evaluation and state-management workflow. The upstream root orchestrator was implemented by another team member.</p></div>
+    <div className="case-study-contribution"><span>MY ENGINEERING CONTRIBUTION</span><p>Implemented the HR-domain orchestration, LLM-based keyword selection and boosting, semantic-catalogue guardrails, localization handling, specialist-agent/MCP retrieval integration, reranker-based relevance handling and conversation state. The upstream root orchestrator was implemented by another team member.</p></div>
     <div className="case-study-footnote">Architecture shown at a system level; internal prompts, thresholds and enterprise implementation details are intentionally not disclosed.</div>
   </section>;
 }
