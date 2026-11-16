@@ -223,7 +223,7 @@ export default function App() {
           <div className="hero-copy">
             <div className="hero-kicker"><span className="availability-dot" /> BACKEND AI ENGINEER <i /> PUNE, INDIA</div>
             <h1>Hi, I'm <span>Sarthak<br className="desktop-break" /> Pande.</span></h1>
-            <p className="hero-lede">I'm a <strong>Backend AI / GenAI Engineer</strong> building the systems behind intelligent products — from Python services, APIs and data pipelines to RAG, LLM applications and multi-agent workflows. I focus on making AI systems <strong>reliable, grounded and production-ready.</strong></p>
+            <p className="hero-lede">I build the <strong>backend systems behind useful AI</strong> — retrieval pipelines, LLM applications, multi-agent workflows and the APIs that bring them together.</p>
             <div className="hero-actions">
               <a className="button-primary" href="#projects">Explore my work <span>↘</span></a>
               <a className="button-secondary" href="mailto:sarthakpande1008@gmail.com">Get in touch <span>↗</span></a>
@@ -233,9 +233,9 @@ export default function App() {
           <aside className="hero-aside">
             <div className="aside-label">WHAT I WORK ON</div>
             <div className="focus-list">
-              <div><span>01</span><b>Backend engineering</b><small>Python · APIs · data pipelines · async systems</small></div>
-              <div><span>02</span><b>RAG & knowledge systems</b><small>Ingestion · embeddings · retrieval · evaluation</small></div>
-              <div><span>03</span><b>LLM & agentic AI</b><small>LLM apps · tools · multi-agent orchestration</small></div>
+              <div><span>01</span><b>Retrieval & RAG</b><small>Grounded answers, better context</small></div>
+              <div><span>02</span><b>Agentic systems</b><small>Tools, orchestration, state</small></div>
+              <div><span>03</span><b>AI backend engineering</b><small>Reliable services and integrations</small></div>
             </div>
             <div className="aside-foot"><span>BUILDING IN PROGRESS</span><span className="tiny-spark">✳</span></div>
           </aside>
@@ -245,9 +245,8 @@ export default function App() {
         <section className="about section-wrap" id="about">
           <div className="section-intro"><Eyebrow>01 / ABOUT</Eyebrow><h2>Engineering first.<br/><em>AI where it helps.</em></h2></div>
           <div className="about-body">
-            <p className="about-lead">I engineer the backend foundations and GenAI capabilities that turn an AI idea into a working product.</p>
-            <p>My backend work includes Python services, REST APIs, asynchronous processing, data ingestion, database integration and cloud deployment. On the GenAI side, I build RAG pipelines, document-intelligence workflows, LLM-powered applications and multi-agent systems — connecting models to tools and enterprise data through orchestration and MCP integrations.</p>
-            <p>I work across the full AI application lifecycle: ingesting and preparing data, retrieving the right context, designing prompts and agent workflows, evaluating output quality, managing conversation state and building the services that expose these capabilities reliably.</p>
+            <p className="about-lead">I'm a backend-focused AI engineer interested in making intelligent systems useful, measurable and dependable.</p>
+            <p>My work spans retrieval-augmented generation, multi-agent systems and applied machine learning. I enjoy solving the engineering problems underneath an AI product: selecting the right context, choosing tools, managing state, grounding responses and evaluating whether the system is actually working.</p>
             <div className="about-facts">
               <div><span>EDUCATION</span><b>B.E. · AI & Data Science</b><small>Savitribai Phule Pune University</small></div>
               <div><span>LOCATION</span><b>Pune, Maharashtra</b><small>India</small></div>
@@ -257,7 +256,7 @@ export default function App() {
         </section>
 
         <section className="experience section-wrap" id="experience">
-          <div className="section-heading"><div><Eyebrow>02 / EXPERIENCE</Eyebrow><h2>Where I work<span>.</span></h2></div><p>Building backend systems and end-to-end GenAI solutions across agentic AI, RAG, document intelligence and LLM-powered automation.</p></div>
+          <div className="section-heading"><div><Eyebrow>02 / EXPERIENCE</Eyebrow><h2>Where I work<span>.</span></h2></div><p>Enterprise AI engineering at scale, with a focus on retrieval, orchestration and workflow automation.</p></div>
           <article className="experience-card">
             <div className="experience-company">
               <div className="company-mark">C</div>
@@ -266,7 +265,7 @@ export default function App() {
             </div>
             <div className="experience-content">
               <div className="role-line"><b>AI / GenAI Engineer</b><span>Enterprise GenAI</span></div>
-              <p className="experience-intro">Backend AI engineering across the application stack: service and API development, data and document pipelines, retrieval architecture, LLM integration, agent orchestration, evaluation and enterprise system connectivity.</p>
+              <p className="experience-intro">Building enterprise-grade GenAI solutions across multi-agent orchestration, retrieval-augmented generation, document intelligence and workflow automation.</p>
               <div className="work-list">{experiencePoints.map(([title, description], index) => <div className="work-item" key={title}><span>0{index + 1}</span><div><b>{title}</b><p>{description}</p></div></div>)}</div>\n              <AgenticCaseStudy />
             </div>
           </article>
@@ -278,7 +277,7 @@ export default function App() {
         </section>
 
         <section className="skills section-wrap" id="skills">
-          <div className="section-heading"><div><Eyebrow>04 / TOOLKIT</Eyebrow><h2>How I build<span>.</span></h2></div><p>Backend engineering, machine learning and the complete GenAI stack — from data and APIs to models, agents and evaluation.</p></div>
+          <div className="section-heading"><div><Eyebrow>04 / TOOLKIT</Eyebrow><h2>How I build<span>.</span></h2></div><p>A practical toolkit for designing and shipping AI-powered backend systems.</p></div>
           <div className="skills-grid">{skills.map((group, index) => <article className="skill-group" key={group.title}><span className="skill-number">0{index + 1}</span><h3>{group.title}</h3><div className="tag-list">{group.items.map(item => <span key={item}>{item}</span>)}</div></article>)}</div>
         </section>
 
